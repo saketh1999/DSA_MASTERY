@@ -1,0 +1,1 @@
+pivot_index && j>pivot_index
