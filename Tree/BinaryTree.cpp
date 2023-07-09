@@ -1,11 +1,13 @@
 #include <iostream>
+#include <stack>
 #include<queue>
+#include<unordered_set>
 using namespace std;
 //This code contains
 // How to build a tree using recursion
 // How to build a tree in level order fashion
 // Level Order Trav
-// Inorder,Preorder and Postorder Trav
+// Inorder,Preorder and Postorder Trav (Recursively and iteratively)
 class Node{
     public:
     int data;
@@ -62,13 +64,14 @@ Node* LevelOrderTraversal(Node* root)
         }
         else{
             cout<<temp->data<<" ";
-            if(temp->right)
-            {
-                level.push(temp->right);
-            }
             if(temp->left)
             {
                 level.push(temp->left);
+            }
+
+            if(temp->right)
+            {
+                level.push(temp->right);
             }
 
         }
@@ -85,6 +88,33 @@ void inorderTrav(Node* root)
 
 
 }
+void inorderTrav_Iterative(Node* root)
+{
+    if(root==NULL)
+    return;
+
+    stack<Node*> st;
+   
+      Node* front= root;
+    while(!st.empty() || front!=NULL)
+    {
+      
+        
+        while(front!=NULL)
+        {
+            st.push(front);
+            front=front->left;
+        }
+
+        front=st.top();
+        cout<<front->data<<" ";
+        st.pop();
+
+        front=front->right;
+
+    }
+
+}
 void preorderTrav(Node* root)
 {
     if(root==NULL)
@@ -95,6 +125,33 @@ void preorderTrav(Node* root)
     preorderTrav(root->right);
 
 }
+void preorderTrav_Iterative(Node* root)
+{
+    if(root==NULL)
+    return;
+
+    stack<Node*> st; 
+    st.push(root);
+   
+    
+    while(!st.empty() )
+    {
+        Node* front= st.top();
+        st.pop();
+        cout<<front->data<<" ";
+        
+        if(front->right)
+        {
+            st.push(front->right);
+        }
+        if(front->left)
+        {
+            st.push(front->left);
+        }
+
+    }
+
+}
 void postorderTrav(Node* root)
 {
     if(root==NULL)
@@ -103,6 +160,45 @@ void postorderTrav(Node* root)
     postorderTrav(root->left);
     postorderTrav(root->right);
     cout<<root->data<<" ";
+}
+void postorderTrav_Iterative(Node* root)
+{
+    if(root==NULL)
+    return;
+
+    stack<Node*> treeStack;
+    unordered_set<Node*> visitedNodeSet;
+    Node* currNode = root;
+
+    while (!treeStack.empty() || currNode != NULL) 
+    {
+        if (currNode != NULL) 
+        {
+            if (visitedNodeSet.count(currNode) > 0) 
+            {
+                // currNode has already been visited
+                cout << currNode->data << " ";
+                currNode = NULL;
+            }
+            else 
+            {
+                // first visit to currNode
+                treeStack.push(currNode);
+                if (currNode->right != NULL)
+                    treeStack.push(currNode->right);
+                
+                visitedNodeSet.insert(currNode);
+                currNode = currNode->left;
+            }
+        }
+        else 
+        {
+            // currNode is NULL, pop next node from stack
+            currNode = treeStack.top();
+            treeStack.pop();
+        }
+    }
+
 }
 void BuildLevelOrder(Node* &root)
 {
@@ -143,11 +239,11 @@ int main ()
 
 Node* root =NULL;
 //Recursively 
-//root=BuildTree(root);
+root=BuildTree(root);
 //Input String= 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1 
 
 //Level order creation of Binary Tree
-BuildLevelOrder(root);
+//BuildLevelOrder(root);
 
 //Level Order Traversal
 cout<<"Level Order Traversal is as follows : ";
@@ -160,15 +256,25 @@ inorderTrav(root);
 cout<<endl;
 
 //PreOrder Traversal
-cout<<"Inorder Traversal: ";
+cout<<"Preorder Traversal: ";
 preorderTrav(root);
 cout<<endl;
 
 
 //Post Order Traversal
-cout<<"Inorder Traversal: ";
+cout<<"Postorder Traversal: ";
 postorderTrav(root);
 cout<<endl;
 
+cout<<"Inorder Traversal: ";
+inorderTrav_Iterative(root);
+cout<<endl;
 
+cout<<"Preorder Traversal: ";
+preorderTrav_Iterative(root);
+cout<<endl;
+
+cout<<"Postorder Traversal: ";
+postorderTrav_Iterative(root);
+cout<<endl;
 }
