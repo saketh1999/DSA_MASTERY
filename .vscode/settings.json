@@ -7,5 +7,10 @@
         "new": "cpp",
         "queue": "cpp"
     },
-    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
+    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve",
+    "cmake.configureSettings": {
+
+    },
+    "terminal.integrated.fontFamily": "MesloLGS NF"
+    
 }
