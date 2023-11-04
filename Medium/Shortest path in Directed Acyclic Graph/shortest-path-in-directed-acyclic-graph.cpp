@@ -7,10 +7,28 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 class Solution {
+ private:
+    void dfs(map<int,list<pair<int,int> >> &adjlist, stack<int>&topo,vector<bool> &visited,int v)
+    {
+        visited[v]=true;
+        
+        for(auto x : adjlist[v])
+        {
+            int vt = x.first;
+            int wt = x.second;
+            
+            if(visited[vt]!=true)
+            {
+                dfs(adjlist,topo,visited,vt);
+            }
+        }
+        topo.push(v);
+        return;
+    }
   public:
      vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
         // code here
-        vector<int> dis(N,-1);
+        // vector<int> dis(N,-1);
         
         //create adjlist
         map<int,list<pair<int,int> >> adjlist;
@@ -22,40 +40,31 @@ class Solution {
             
             adjlist[i].push_back({j,w});
         }
-        
-        priority_queue< pair<int,int>  ,vector<pair<int,int>>, greater<pair<int,int >> > pq;
-        
+        stack<int> topo;
+        vector<bool> visited(N,false);
+        dfs(adjlist,topo,visited,0);
+        vector<int> dis(N,-1);
         dis[0]=0;
-        pq.push({0,0});
-        
-        
-        while(!pq.empty())
-        {
-            pair<int,int>  front = pq.top();
-            pq.pop();
-            
-            int i = front.second;
-          
-            int w= front.first;
-            
-            for(auto x : adjlist[i])
-            {
-                int e = x.first;
-                int wt = x.second;
-                
-                if(dis[e]==-1)
-                {
-                    dis[e]=dis[i]+wt;
-                    pq.push({dis[e],e});
-                }
-               else if(dis[e]>dis[i]+wt)
-                {
-                    dis[e]=dis[i]+wt;
-                    pq.push({dis[e],e});
-                }
-            }
-        }
-        return dis;
+       while(!topo.empty())
+       {
+           int front = topo.top();
+           topo.pop();
+           for(auto x : adjlist[front])
+           {
+               int v = x.first;
+               int w = x.second;
+               if(dis[v]==-1)
+               {
+                   dis[v]=dis[front]+w;
+               }
+               if(dis[v]> dis[front]+w)
+               {
+                   dis[v]=dis[front]+w;
+               }
+           }
+           
+       }
+       return dis;
     }
 };
 
