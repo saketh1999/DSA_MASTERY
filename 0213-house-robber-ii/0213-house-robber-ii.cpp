@@ -38,8 +38,31 @@ public:
             temp2.push_back(nums[i]);
         }
         vector<int> dp1(n,-1),dp2(n,-1);
-        int first = maxAmt(temp1.size()-1,temp1,dp1);
-        int second = maxAmt(temp2.size()-1,temp2,dp2);
-       return max(first,second) ;
+
+        dp1[0]=nums[1];dp2[0]=nums[0];
+
+        for(int i=1;i<temp1.size();i++)
+        {
+            int left = dp1[i-1];
+
+            int right = temp1[i];
+            if(i>1)
+            right+=dp1[i-2];
+
+            dp1[i]=max(left,right);
+        }
+        
+         for(int i=1;i<temp2.size();i++)
+        {
+            int left = dp2[i-1];
+
+            int right = temp2[i];
+            if(i>1)
+            right+=dp2[i-2];
+
+            dp2[i]=max(left,right);
+        }
+     
+       return max(dp1[temp1.size()-1],dp2[temp2.size()-1]) ;
     }
 };
