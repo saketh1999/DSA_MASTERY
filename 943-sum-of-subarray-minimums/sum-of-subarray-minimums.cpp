@@ -36,8 +36,7 @@ public:
         for(int i=0;i<arr.size();i++)
         {
             
-            res += (arr[i]*left[i]*right[i]);
-            res = res%mod;
+            res = (res+ (arr[i]*left[i]*right[i])) %mod;
             
         }
         return res;
