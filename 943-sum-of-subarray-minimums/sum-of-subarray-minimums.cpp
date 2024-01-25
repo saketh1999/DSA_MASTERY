@@ -1,43 +1,36 @@
-using ll = long long;
-const int MOD = 1e9 + 7;
-
 class Solution {
 public:
-    int sumSubarrayMins(vector<int>& nums) {
-        int length = nums.size();
-        vector<int> left(length, -1);
-        vector<int> right(length, length);
-        stack<int> stk;
-
-        for (int i = 0; i < length; ++i) {
-            while (!stk.empty() && nums[stk.top()] >= nums[i]) {
-                stk.pop();
-            }
-            if (!stk.empty()) {
-                left[i] = stk.top();
-            }
-            stk.push(i);
+int sumSubarrayMins(vector<int>& arr) {
+    stack<pair<int,int>> s1; //for left fill
+    stack<pair<int,int>> s2; // for right fill
+    vector<long> left(arr.size());
+    vector<long> right(arr.size());
+    for(int i=0;i<arr.size();++i){
+                int c=1;
+                while(!s1.empty() && s1.top().first >= arr[i]){
+                 c+=s1.top().second;
+                s1.pop();
+                }
+                s1.push({arr[i],c});
+                left[i] = c;
         }
-
-        stk = stack<int>();
-
-        for (int i = length - 1; i >= 0; --i) {
-            while (!stk.empty() && nums[stk.top()] > nums[i]) {
-                stk.pop();
-            }
-            if (!stk.empty()) {
-                right[i] = stk.top();
-            }
-            stk.push(i);
-        }
-
-        ll sum = 0;
-
-        for (int i = 0; i < length; ++i) {
-            sum += static_cast<ll>(i - left[i]) * (right[i] - i) * nums[i] % MOD;
-            sum %= MOD;
-        }
-
-        return sum;
+    
+     for(int i=arr.size()-1;i>=0;i--){
+         int c=1;
+                while(!s2.empty() && s2.top().first > arr[i]){
+                 c+=s2.top().second;
+                s2.pop();
+                }
+                s2.push({arr[i],c});
+                right[i] = c;
     }
+    long int sum=0;
+    for(int i=0;i<arr.size();++i){
+        long int c = arr[i];
+        sum+=(c*left[i]*right[i]);
+             sum=sum % (1000000000 + 7);
+
+    }
+    return sum;
+}
 };
