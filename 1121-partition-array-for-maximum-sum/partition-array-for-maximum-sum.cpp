@@ -1,23 +1,22 @@
 class Solution {
 public:
-    int solver(int ind, vector<int>& arr,vector<int> & dp,int k)
-    {
-        int n =arr.size();
-        if(ind>=n)
-        return 0;
-        if(dp[ind]!=-1)
-        return dp[ind];
-        int maxi=INT_MIN,ans=0;
-        for(int j=ind; j<min(n,ind+k);j++)
-        {
-            maxi=max(arr[j],maxi);
-            ans = max(ans, (j-ind+1)*maxi + solver(j+1,arr,dp,k));
-        }
-       return dp[ind] = ans;
-    }
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
         int n = arr.size();
-        vector<int>dp(n,-1);
-        return solver(0,arr,dp,k);
+        vector<int>dp(n+1,0);
+        //Bottom Up Appoach
+
+        for(int i = n-1; i>=0; i--)
+        {
+            int maxi=INT_MIN,ans=0;
+        for(int j=i; j<min(n,i+k);j++) // running j till min(n or ind+k)
+        {
+            maxi=max(arr[j],maxi);
+            ans = max(ans, (j-i+1)*maxi + dp[j+1]); // since we are stating from
+            //ind, we need to do j+1 call each time .
+            //Finall call will be to j+ind-1
+        }
+        dp[i] = ans;
+        }
+        return dp[0];
     }
 };
