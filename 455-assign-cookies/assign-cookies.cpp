@@ -5,27 +5,25 @@ public:
         return 0;
         int greedIdx = g.size()-1;
         int cookiesIdx = s.size()-1;
+        int children=0;
 
         //Sort the cookies and greed factors
         sort(g.begin(),g.end());
         sort(s.begin(),s.end());
 
-        int children=0;
-        while(greedIdx>=0 && cookiesIdx>=0)
-        {
-            if(s[cookiesIdx]>=g[greedIdx])
+            while(cookiesIdx>=0 && greedIdx>=0)
             {
-                children++;
-                cookiesIdx--;
-                greedIdx--;
+                if(g[greedIdx]<=s[cookiesIdx])
+                {
+                    children++;
+                    greedIdx--;
+                    cookiesIdx--;
+                }
+                else{
+                    greedIdx--;
+                }
             }
-            else
-            {
-                //Since the cookies at other index can be used to satisfy the 
-                //greed of other children
-                greedIdx--;
-            }
-        }
+        
         return children;
 
         
