@@ -15,6 +15,8 @@ public:
             l=r+1;
             r = farthest;
             jumps+=1;
+            if(farthest >= nums.size())
+            return jumps;
         }
         return jumps;
 
