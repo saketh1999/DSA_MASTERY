@@ -13,6 +13,7 @@ class Solution:
                 heapq.heappush(myhash,first-second)
             
 
-        myhash.append(0)
+        if len(myhash) == 0:
+            return 0
         return abs(myhash[0])
                 
