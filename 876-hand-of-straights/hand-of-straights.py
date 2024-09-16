@@ -25,9 +25,8 @@ class Solution:
                     return False
 
                 myDict[i] -= 1
+
                 if myDict[i] == 0:
-                    # if i != myheap[0]: # this is because, 1,2,3 example
-                    #     return False
                     heapq.heappop(myheap)
 
         return True
