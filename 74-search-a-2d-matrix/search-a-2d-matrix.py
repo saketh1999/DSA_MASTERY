@@ -23,17 +23,10 @@ class Solution:
 
 
         for i in range(len(matrix)):
-                # print(matrix[i][n])
                 if target >=  matrix[i][0] and target <= matrix[i][n]:
-                    #Do binary search
                  
                     col_start = 0
                     col_end = n
-                    if col_start == col_end:
-                        print("hi")
-                        if matrix[i][col_start] == target:
-                            return True
-                        else: return False
                     row = i
 
                     return myBinarySearch(self,col_start,col_end,row,matrix,target)
