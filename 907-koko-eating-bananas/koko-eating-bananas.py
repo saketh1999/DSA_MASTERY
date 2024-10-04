@@ -8,7 +8,8 @@ class Solution:
             k = (l+r)//2
             total_time = 0
             for p in piles:
-                total_time += math.ceil(float(p)/k)
+                total_time += math.ceil((p)/k)
+
             if total_time <= h :
                     res = k
                     r = k-1
