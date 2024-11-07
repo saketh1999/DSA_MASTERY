@@ -10,9 +10,7 @@ class Solution:
 
         def queens(r):
             if r == n :
-                print('hi')
                 copy = ["".join(row) for row in board ]
-                print(copy)
                 res.append(copy)
                 return
             
