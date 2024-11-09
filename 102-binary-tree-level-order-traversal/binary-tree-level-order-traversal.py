@@ -14,7 +14,8 @@ class Solution:
             size_q = len(my_q)
             temp = []
             for i in range(size_q):
-                front = my_q.popleft()
+                front = my_q[0]
+                my_q.popleft()
                 if front:
                     temp.append(front.val)
 
