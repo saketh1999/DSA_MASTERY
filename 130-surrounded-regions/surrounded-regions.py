@@ -39,9 +39,7 @@ class Solution:
             for j in range(col):
                 if visited_cells[i][j]==0 and board[i][j]=="O":
                     board[i][j]="X"
-        
-        print(visited_cells)
-        return board
+
 
 
 
