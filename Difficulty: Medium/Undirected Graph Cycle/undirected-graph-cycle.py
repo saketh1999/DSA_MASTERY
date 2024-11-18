@@ -4,30 +4,26 @@ class Solution:
     #Function to detect cycle in an undirected graph.
 	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
 		#Code here
-		visited = [0 for _ in range(V+1)]
-		
-		
-		def bfs_cycle_detection(node):
-		    q = deque()
-		    q.append((node,-1))
-		    visited[node]=1
-		    
-		    
-		    while q:
-		        curr,parent = q[0]
-		        q.popleft()
-		        
-		        for n in adj[curr]:
-		            if visited[n] == 0:
-		                visited[n]=1
-		                q.append((n,curr))
+		visited = [0 for _ in range(V)]
 		                
-		            elif parent!= n:
+		def dfs_cycle_detection(node,parent):
+		    
+		    visited[node] = 1
+		    
+		    for n in adj[node]:
+		        if visited[n] == 0:
+		            if dfs_cycle_detection(n,node):
 		                return True
+		                
+		        elif parent!=n:
+		            
+		            return True
+		            
+		    return False
 		                
 		for i in range(V):
 		     if visited[i]==0:
-		         if bfs_cycle_detection(i):
+		         if dfs_cycle_detection(i,-1):
 		             return True
 		        
 		    
