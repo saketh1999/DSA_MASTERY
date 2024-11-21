@@ -14,6 +14,7 @@ class Solution:
             stairs[n] = climb(n-1)+climb(n-2)
             return stairs[n]
         
+        #Bottom Up Approach
         def climbTD(n):
             stairs = [-1]*(n+1)
             stairs[0]=1
@@ -23,5 +24,18 @@ class Solution:
 
             
             return stairs[n]
+
+        def climbTD_SpaceOptimized(n):
+
+            prev2Stair = 1
+            prevStair = 1
+            for i in range(2,n+1):
+             curr = prev2Stair+prevStair
+
+             prev2Stair=prevStair
+             prevStair=curr
+
+            
+            return prevStair
         
-        return climbTD(n)
+        return climbTD_SpaceOptimized(n)
