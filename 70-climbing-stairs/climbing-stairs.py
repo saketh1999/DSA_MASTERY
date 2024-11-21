@@ -14,4 +14,14 @@ class Solution:
             stairs[n] = climb(n-1)+climb(n-2)
             return stairs[n]
         
-        return climb(n)
+        def climbTD(n):
+            stairs = [-1]*(n+1)
+            stairs[0]=1
+            stairs[1]=1
+            for i in range(2,n+1):
+             stairs[i]=stairs[i-1]+stairs[i-2]
+
+            
+            return stairs[n]
+        
+        return climbTD(n)
