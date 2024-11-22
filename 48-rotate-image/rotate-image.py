@@ -6,9 +6,9 @@ class Solution:
         left,right = 0,len(matrix)-1
 
         while left<right:
-            
+            top,bottom=left,right
             for i in range(right-left):
-                top,bottom=left,right
+                
 
                 #storing the topLeft element
                 topleft = matrix[top][left+i]
