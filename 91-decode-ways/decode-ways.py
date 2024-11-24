@@ -70,13 +70,13 @@ class Solution:
                             ways+=prev2
                     
                     curr = ways
-                    prev2 = prev
-                    prev = curr
+                prev2 = prev
+                prev = curr
                             
         
                     
     
             return curr
-
+        return decode_BU_spaceOptimized(s)
         return decode_BU(s)
         return decode(s,0)
