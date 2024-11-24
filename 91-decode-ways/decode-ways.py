@@ -38,20 +38,45 @@ class Solution:
             for i in range(n-1,-1,-1):
                 
                 if s[i] =='0':
-                    print('i')
                     dp[i]=0
+
                 else:
                     ways = dp[i+1]
 
                     if  i+1 < len(s):
                         if (s[i] == '1' or (s[i] == '2' and s[i + 1] < '7')):
                             ways+=dp[i+2]
+
                     dp[i] = ways
                     
-               
-            print(dp)
+    
             return dp[0]
 
+        def decode_BU_spaceOptimized(s):
+            n=len(s)
+            prev = 1
+            prev2=-1
+
+            for i in range(n-1,-1,-1):
+                curr=-1
+                if s[i] =='0':
+                    curr=0
+
+                else:
+                    ways = prev
+
+                    if  i+1 < len(s):
+                        if (s[i] == '1' or (s[i] == '2' and s[i + 1] < '7')):
+                            ways+=prev2
+                    
+                    curr = ways
+                    prev2 = prev
+                    prev = curr
+                            
+        
+                    
+    
+            return curr
 
         return decode_BU(s)
         return decode(s,0)
