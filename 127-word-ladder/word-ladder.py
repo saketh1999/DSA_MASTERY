@@ -22,7 +22,7 @@ class Solution:
         q.append(beginWord)
         res=1
         while q:
-            for i in range(len(q)):
+            for i in range(len(q)): #start to end distance of the graph (dont count the nodes on same level distance)
                 word = q[0]
                 q.popleft()
 
@@ -35,7 +35,12 @@ class Solution:
                         if nei not in visited:
                             q.append(nei)
                             visited.add(nei)
-            res+=1
-
+            res+=1 #res is nothing but the height of the graph from the start 
+        
+        #if you dont find the path within the BFS return 0
+        #example:
+        #begin : hot
+        #end : dog
+        #wordlist: ["hot","dog"]
         return 0
 
