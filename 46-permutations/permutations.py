@@ -1,18 +1,17 @@
 class Solution:
-    def permutation(self,nums,index,res):
-        if index == len(nums)-1:
-            res.append(nums.copy())
-            return
-        
-        for i in range(index,len(nums),1):
-            
-            nums[index],nums[i] = nums[i],nums[index]
-            self.permutation(nums,index+1,res)
-            nums[index],nums[i] = nums[i],nums[index]
-
-        return
     def permute(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        self.permutation(nums,0,res)
+        res=set()
+        def permutation(ind):
+            if ind >=len(nums)-1:
+                copy=nums.copy()
+                res.add(tuple(copy))
+                return
+            
+            for i in range(len(nums)):
+                
+                nums[ind],nums[i]=nums[i],nums[ind]
+                permutation(ind+1)
+                nums[i],nums[ind]=nums[ind],nums[i]
 
-        return res
+        permutation(0)
+        return list(res)
