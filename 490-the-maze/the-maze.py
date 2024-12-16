@@ -2,9 +2,7 @@ from collections import deque
 
 class Solution:
        def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:
-        # if not maze or not start or not destination:
-        #     # bad input
-        #     return False
+
         if start == destination:
             # input start and destination were the same
             return True
