@@ -3,13 +3,13 @@ class Codec:
         """Encodes a list of strings to a single string.
         
         """
-        return "π".join(strs)
+        return "ë".join(strs)
         
 
     def decode(self, s: str) -> List[str]:
         """Decodes a single string to a list of strings.
         """
-        return s.split('π')
+        return s.split('ë')
         
 
 
