@@ -1,28 +1,22 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        res = []
+        res=[]
         myStr = []
-        openB,closeB = 0,0
-        
-
-        def my_counter(myStr,openB,closeB,res,n):
-            if openB == n and closeB == n:
-                res.append("".join(myStr))
-                return
+        openB,closeB=0,0
+        def generator(openB,closeB):
+            if openB == n and closeB==n:
+                copy = "".join(myStr)
+                res.append(copy)
             
-            if openB < n:
-                myStr.append("(")
-                my_counter(myStr,openB+1,closeB,res,n)
+            if openB<n:
+                myStr.append('(')
+                generator(openB+1,closeB)
                 myStr.pop()
 
-            if closeB < openB:
-                myStr.append(")")
-                my_counter(myStr,openB,closeB+1,res,n)
+            if closeB<openB:
+                myStr.append(')')
+                generator(openB,closeB+1)
                 myStr.pop()
-
-        my_counter(myStr,0,0,res,n)
+        generator(0,0)
         return res
-            
-
-
 
