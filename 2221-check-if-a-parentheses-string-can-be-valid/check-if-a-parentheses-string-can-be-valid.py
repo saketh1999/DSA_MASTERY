@@ -16,7 +16,8 @@ class Solution:
                 else:
                     return False
             
-        
+        #locked_stack[-1] < unlocked_stack[-1] => is because '(' should occur before the wildcard
+        #for the strings to be valid
         while locked_stack and unlocked_stack and locked_stack[-1] < unlocked_stack[-1]:
             locked_stack.pop()
             unlocked_stack.pop()
