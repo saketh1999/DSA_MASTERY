@@ -45,9 +45,6 @@ class Solution:
                 # advancing traversal
                 temp = front
 
-            # Return the new head
-            # of the reversed linked list
-            return prev
         
         temp = head
 
