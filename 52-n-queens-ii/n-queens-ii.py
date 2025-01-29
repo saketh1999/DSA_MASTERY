@@ -1,23 +1,36 @@
 class Solution:
     def totalNQueens(self, n: int) -> int:
 
-        def backtrack(row, cols, diag1, diag2):
-            if row == n:
-                return 1
-            count = 0
-            for col in range(n):
-                # Check if the current column and diagonals are under attack
-                if col not in cols and (row - col) not in diag1 and (row + col) not in diag2:
-                    # Place the queen
-                    cols.add(col)
-                    diag1.add(row - col)
-                    diag2.add(row + col)
-                    # Move to the next row
-                    count += backtrack(row + 1, cols, diag1, diag2)
-                    # Backtrack (remove the queen)
-                    cols.remove(col)
-                    diag1.remove(row - col)
-                    diag2.remove(row + col)
-            return count
+        board = [['.' for i in range(n)] for j in range(n)]
+        res = []
+        
+        col = set()
+        post_d = set()
+        neg_d = set()
 
-        return backtrack(0, set(), set(), set())
+        def queens(r):
+            if r == n :
+                copy = ["".join(row) for row in board ]
+                res.append(copy)
+                return
+            
+            for c in range(n):
+             
+                if c in col or (r+c) in post_d or (r-c) in neg_d:
+                    continue
+
+                col.add(c)
+                post_d.add(r+c)
+                neg_d.add(r-c)
+                board[r][c] = 'Q'
+
+                queens(r+1)
+
+                col.remove(c)
+                post_d.remove(r+c)
+                neg_d.remove(r-c)
+                board[r][c] = '.'
+
+        queens(0)
+
+        return len(res)
