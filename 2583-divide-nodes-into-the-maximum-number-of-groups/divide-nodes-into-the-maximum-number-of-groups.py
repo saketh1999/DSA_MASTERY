@@ -32,7 +32,7 @@ class Solution:
                         if dist[nei] == dis:
                             return -1
                         continue
-                        
+
                     q.append((nei,dis+1))
                     dist[nei] = dis+1
 
@@ -47,7 +47,6 @@ class Solution:
             if i not in visited:
                 visited.add(i)
                 component = get_connected_component(i)
-                print(component)
 
                 #after getting the connected component
                 max_cnt = 0
