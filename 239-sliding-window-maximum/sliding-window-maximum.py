@@ -6,12 +6,12 @@ class Solution:
 
         for i in range(len(nums)):
             if q and q[0] <= i-k:
-                q.popleft()
+                q.popleft() #pop from the front
             
             while q and nums[q[-1]] <= nums[i]:
-                q.pop()
+                q.pop() #pop from the back
             q.append(i)
 
-            if i>=k-1:
+            if i-k>=-1:
                 res.append(nums[q[0]])
         return res
