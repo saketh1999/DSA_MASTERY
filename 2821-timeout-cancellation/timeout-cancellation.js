@@ -5,7 +5,7 @@
  * @return {Function}
  */
 var cancellable = function(fn, args, t) {
-    const timeOutId = setTimeout(()=>fn.apply(null,args),t)
+    const timeOutId = setTimeout(()=>fn(...args),t)
 
     const cancelFn = ()=>{
         clearTimeout(timeOutId)
