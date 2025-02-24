@@ -1,23 +1,21 @@
 /**
- * @param {Array} arr
+ * @param {any[]} arr
  * @param {number} depth
- * @return {Array}
+ * @return {any[]}
  */
 var flat = function (arr, n) {
-    let res = []
-    const flattening = (temp_arr,l)=>{
-        for (const small_Arr of temp_arr){
+	const stack = [...arr.map((item) => [item, n])];
+	const res = [];
+	
+	while (stack.length > 0) {
+		const [item, depth] = stack.pop();
+		if (Array.isArray(item) && depth > 0) {
+			// push back with depth - 1
+			stack.push(...item.map((el) => [el, depth - 1]));
+		} else {
+			res.push(item);
+		}
+	}
 
-        
-        if (Array.isArray(small_Arr) && l>0){
-            flattening(small_Arr,l-1)
-        }
-        else{
-            res.push(small_Arr)
-        }
-    }
-
-    }
-    flattening(arr,n)
-    return res
+	return res.reverse();
 };
