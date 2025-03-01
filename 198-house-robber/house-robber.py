@@ -1,37 +1,19 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        dp = [-1]*(len(nums)+1)
         n = len(nums)
-        money = [-1] * (n+1)
-        
-        #Top Down
-        def robbery(n):
-            if n<0:
+        def helper(i):
+            if i<0:
                 return 0
-    
-            if money[n]!=-1:
-                return money[n]
 
-            #rob curr house
-            x = nums[n] + robbery(n-2)
-
-            #don't rob
-            y = robbery(n-1)
-
-            money[n] = max(x,y)
-            return money[n]
+            # if i==0 or i==1:
+            #     return nums[i]
+            
+            if dp[i]!=-1:
+                return dp[i]
+            take = nums[i] + helper(i-2)
+            dont_take = helper(i-1)
+            dp[i] = max(take,dont_take)
         
-        #Bottom Up
-        def robbery_TD(n):
-            if n<0:
-                return 0
-            if len(nums)==1:
-                return nums[0]
-            money[0] = nums[0]
-            money[1] = max(nums[0],nums[1])
-
-            for i in range(2,n):
-                money[i] = max(money[i-1],nums[i]+money[i-2])
-
-            return money[n-1]
-
-        return robbery_TD(n)
+            return dp[i]
+        return max(helper(n-1) , helper(n-2))
