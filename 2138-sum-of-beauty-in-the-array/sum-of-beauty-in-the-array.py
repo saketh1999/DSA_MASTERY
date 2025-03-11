@@ -4,6 +4,7 @@ class Solution:
         greatest = [-nums[0]]
         smallest = []
         sum=0
+
         for i in range(2,n):
             smallest.append(nums[i])
         
@@ -14,7 +15,6 @@ class Solution:
         for i in range(1,n-1):
             upper = smallest[0]
             lower = -greatest[0]
-            print(lower,upper)
 
             if lower<nums[i] and nums[i]<upper:
                 sum+=2
@@ -22,5 +22,5 @@ class Solution:
                 sum+=1
             heapq.heappush(greatest,-nums[i])
             heapq.heappop(smallest)
-            print(sum,i)
+            
         return sum
