@@ -1,30 +1,28 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp1 = [-1]*(n+1)
+        dp2 = [-1]*(n+1)
 
-       
-        if len(nums)==1:
+        if n == 1:
             return nums[0]
-        #Bottom Up
-        def robbery_TD(nums):
-            n=len(nums)
 
-            if n<=0:
+        def helper(h,arr,dp):
+
+            if h<0:
                 return 0
-            if n==1:
-                return nums[0]
-            print(nums)
-            prev2 = nums[0]
-            prev = max(nums[0],nums[1])
 
-            for i in range(2,n):
-                curr = max(prev,nums[i]+prev2)
-                prev2=prev
-                prev=curr
+    
+            if dp[h]!=-1:
+                return dp[h]
 
-            return prev
+            pick = arr[h] + helper(h-2,arr,dp)
+            d_pick = helper(h-1,arr,dp)
 
+            dp[h] = max(pick,d_pick)
+            return dp[h]
 
-        arr1,arr2=nums[:-1],nums[1:]
-       
+        arr1 = nums[1:n]
+        arr2 = nums[0:n-1]
 
-        return max(robbery_TD(arr1),robbery_TD(arr2))
+        return max(helper(n-2,arr1,dp1),helper(n-2,arr2,dp2))
