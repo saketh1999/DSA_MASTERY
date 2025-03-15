@@ -5,7 +5,9 @@ class Solution:
         top=0
         bottom = len(matrix)
         res = []
+
         while left<right and top<bottom:
+
             for i in range(left,right):
                 res.append(matrix[top][i])
             top+=1
@@ -14,7 +16,7 @@ class Solution:
                 res.append(matrix[j][right-1])
             right-=1
 
-            if  (top>=bottom or left>=right):
+            if  not (top<bottom and left<right):
                 break
             
             for k in range(right-1,left-1,-1):
