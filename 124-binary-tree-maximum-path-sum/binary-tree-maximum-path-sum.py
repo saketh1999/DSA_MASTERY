@@ -17,6 +17,7 @@ class Solution:
 
             max_val = max(max_val,root.val+left+right)
 
+
             return root.val + max(left,right)
 
         maxPath(root)
