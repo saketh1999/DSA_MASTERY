@@ -1,12 +1,20 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        res = defaultdict(list)
-        for s in strs:
-            count = [0]*26
+        my_dict = {}
+        for x in strs:
+            w_count = [0 for i in range(26)]
 
-            for c in s:
-                count[ord(c)-ord('a')]+=1
-            
-            res[tuple(count)].append(s)
+            for c in x:
+                w_count[ord(c)-ord('a')]+=1
+
+            if tuple(w_count) not in my_dict:
+                my_dict[tuple(w_count)]=[]
+            my_dict[tuple(w_count)].append(x)
         
-        return [values for values in res.values()]
+        res = []
+        for key in my_dict.keys():
+
+            res.append(my_dict[key])
+        return res
+            
+                
