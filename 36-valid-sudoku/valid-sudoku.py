@@ -32,7 +32,6 @@ class Solution:
 
             for i in range(3):
                 for j in range(3):
-                    print(ord(board[i+r][j+c])-ord('0'))
                     if board[i+r][j+c]=='.':continue
                     if matrix[ord(board[i+r][j+c])-ord('0')]==1:
                         return True
