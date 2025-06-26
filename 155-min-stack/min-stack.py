@@ -3,6 +3,7 @@ class MinStack:
     def __init__(self):
         self.stack = []
         self.min = math.inf
+        #stack will have two values [stack element, minimum]
 
     def push(self, val: int) -> None:
         if val < self.min:
