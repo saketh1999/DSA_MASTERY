@@ -5,36 +5,39 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def traverse_tree(self,root1,root2):
-        if root1 == root2 == None:
-            return True
-        if root1 == None and root2 != None:
-            return False
-        if root2 == None and root1 != None:
-            return False
-            
-        left,right = False,False
-        if root1.val == root2.val :
-            print(root1.val,root2.val)
-            left = self.traverse_tree(root1.left,root2.left)
-            right = self.traverse_tree(root1.right,root2.right)
-        
-        return left and right
-
-    def inorderTrav(self,root1,root2):
-        if root1 == None:
-            return False
-        
-        if root1.val == root2.val and self.traverse_tree(root1,root2):
-            return True
-        
-        left = self.inorderTrav(root1.left,root2)
-        right = self.inorderTrav(root1.right,root2)
-
-        return left or right
-            
-
-
-
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        return self.inorderTrav(root,subRoot)
+        
+
+        def traverse(root1,root2):
+            if root1 is None and root2 is None :
+                return True
+            if root1 is None and root2 is not None:
+                return False
+            if root1 is not None and root2 is None:
+                return False
+            
+            left,right = False,False
+            if root1.val == root2.val:
+                left = traverse(root1.left,root2.left)
+                right = traverse(root1.right,root2.right)
+
+            return left and right
+
+
+        def inorder(node1,node2):
+            if node1 is None:
+                return False
+            if node2 is None:
+                return True
+            
+            if node1.val == node2.val and traverse(node1,node2):
+
+                return True
+            
+            left = inorder(node1.left,node2)
+            right = inorder(node1.right,node2)
+            
+            return left or right
+        
+        return inorder(root,subRoot)
+            
