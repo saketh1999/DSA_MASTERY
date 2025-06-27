@@ -16,7 +16,7 @@ class Solution:
                 return 0
             left = height(root.left)
             right = height(root.right)
-            if left <0 or right<0 or abs(height(root.left)-height(root.right))>1: return -1
+            if left <0 or right<0 or abs(left-right)>1: return -1
 
             return 1+max(left,right)
 
