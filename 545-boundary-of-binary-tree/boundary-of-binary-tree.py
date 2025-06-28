@@ -23,7 +23,7 @@ class Solution:
                     curr=curr.left
                 else:
                     curr=curr.right
-            print(res)
+
             return res
         
         def right_boundary(root,res):
@@ -40,7 +40,6 @@ class Solution:
             temp.reverse()
             for x in temp:
                 res.append(x)
-            print(res)
             return res
 
         def leaf_nodes(root,res):
