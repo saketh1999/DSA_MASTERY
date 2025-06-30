@@ -1,7 +1,6 @@
 class Solution:
     def rec_sub(self,nums,index,res,curr_res,target):
 
-
         if target == 0:
             res.add(tuple(curr_res.copy()))
             return 
@@ -10,10 +9,10 @@ class Solution:
         if index >= len(nums):
             return
         for i in range(index,len(nums),1):
-            if i > index and nums[i]==nums[index]:
+            if i > index and nums[i]==nums[index]: #if the two adj values are same don't pick
                 continue
-            if nums[i]>target:
-                break
+            # if nums[i]>target: #if target is < nums[i] - dont pick
+            #     break
 
             curr_res.append(nums[i])
             self.rec_sub(nums,i+1,res,curr_res,target-nums[i])
