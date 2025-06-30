@@ -9,10 +9,8 @@ class Solution:
         if index >= len(nums):
             return
         for i in range(index,len(nums),1):
-            if i > index and nums[i]==nums[index]: #if the two adj values are same don't pick
+            if i > index and nums[i]==nums[i-1]: #if the two adj values are same don't pick
                 continue
-            # if nums[i]>target: #if target is < nums[i] - dont pick
-            #     break
 
             curr_res.append(nums[i])
             self.rec_sub(nums,i+1,res,curr_res,target-nums[i])
