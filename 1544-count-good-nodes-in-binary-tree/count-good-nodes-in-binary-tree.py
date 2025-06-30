@@ -17,6 +17,7 @@ class Solution:
                 maxVal = root.val
             inorder_trav(root.left,maxVal)
             inorder_trav(root.right,maxVal)
+            max_val = root.val
             
         inorder_trav(root,-math.inf)
         return count
