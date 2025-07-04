@@ -12,6 +12,6 @@ class Solution:
                 q.pop() #pop from the back
             q.append(i)
 
-            if i-k>=-1:
+            if i+1>=k:
                 res.append(nums[q[0]])
         return res
