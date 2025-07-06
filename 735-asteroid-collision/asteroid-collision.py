@@ -14,10 +14,8 @@ class Solution:
                 if  stack and abs(asteroids[i]) == stack[-1]:
                         stack.pop()
 
-                elif not stack or stack[-1]<0:
+                elif not stack or stack[-1]<0: #this is important - it will also allow you to insert negative values
                     stack.append(asteroids[i])
-
-
 
         return stack
 
