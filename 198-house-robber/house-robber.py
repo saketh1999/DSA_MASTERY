@@ -5,7 +5,9 @@ class Solution:
         def helper(i):
             if i<0:
                 return 0
-            
+            if i==0:
+                return nums[0]
+
             if dp[i]!=-1:
                 return dp[i]
 
@@ -26,10 +28,11 @@ class Solution:
 
             for i in range(1,n):
                 take = nums[i] 
-                if i>1:
+                if i>1: #do this only if i>1 => i=2 or more
                     take+=dp[i-2]
                 dont_take = dp[i-1]
                 dp[i] = max(take,dont_take)
             
             return dp[n-1]
-        return helper_bt_up()
+        ans = max(helper(n-1),helper(n-2))
+        return ans
