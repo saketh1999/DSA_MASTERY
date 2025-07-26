@@ -31,19 +31,19 @@ class Solution:
     def canCross(self, stones: list[int]) -> bool:
         # The first jump must be 1 unit, and the frog starts at stone 0.
         # If the second stone is not at position 1, it's impossible to cross.
-        if stones[1] != 1: # Added base case check from common interpretations of this problem
+        if stones[1] != 1: 
             return False
             
         # Mark stones in the map to identify if such stone exists or not.
         for i, stone in enumerate(stones):
             self.mark[stone] = i
         
-        # Reset dp table for each call to canCross, though in competitive programming,
-        # it's often within a class instance where it might persist.
-        # For a fresh run, it's good practice to ensure it's reset.
-        # In this Python class structure, self.dp is already re-initialized on object creation.
-        # If calling canCross multiple times on the same object, you'd want to re-initialize dp.
-        self.dp = [[-1] * 2001 for _ in range(2001)]
+        # # Reset dp table for each call to canCross, though in competitive programming,
+        # # it's often within a class instance where it might persist.
+        # # For a fresh run, it's good practice to ensure it's reset.
+        # # In this Python class structure, self.dp is already re-initialized on object creation.
+        # # If calling canCross multiple times on the same object, you'd want to re-initialize dp.
+        # self.dp = [[-1] * 2001 for _ in range(2001)]
         
         # Initial call: from stone 0, with a previous jump of 0 (this is a placeholder
         # as the first actual jump is handled within solve from stone[0] to stone[1])
