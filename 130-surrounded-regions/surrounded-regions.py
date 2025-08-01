@@ -28,12 +28,16 @@ class Solution:
             dfs(r,c-1,visited)
         
         for i in range(row):
-            dfs(i,0,visited_cells)
-            dfs(i,col-1,visited_cells)
+            if board[i][0] == "O":
+                dfs(i,0,visited_cells)
+            if board[i][col-1] == "O":
+                dfs(i,col-1,visited_cells)
 
         for i in range(col):
-            dfs(0,i,visited_cells)
-            dfs(row-1,i,visited_cells)
+            if board[0][i]=="O":
+                dfs(0,i,visited_cells)
+            if board[row-1][i]=="O":
+                dfs(row-1,i,visited_cells)
         
         for i in range(row):
             for j in range(col):
